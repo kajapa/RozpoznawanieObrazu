@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
+
 
 public class Generator {
     public TrainingSet CreateTrainingSet(String imagefile, String labelsfile) throws IOException {
@@ -22,18 +24,19 @@ public class Generator {
         List<List<Double>> images = new ArrayList<List<Double>>();
 
 
-
         DataInputStream brLabels = new DataInputStream(new FileInputStream(labelsfile));
         DataInputStream brImages = new DataInputStream(new FileInputStream(imagefile));
-        int bt = brImages.readInt();
+
+        int magicNumber = brImages.readInt();
         int ImagesNumber = brImages.readInt();
         int RowsNumber = brImages.readInt();
         int ColsNumber = brImages.readInt();
-        BufferedImage image = new BufferedImage(ColsNumber,RowsNumber,BufferedImage.TYPE_INT_ARGB);
+        int magicLabel = brLabels.readInt();
+        int numberOfLabels = brLabels.readInt();
+        BufferedImage image = new BufferedImage(ColsNumber, RowsNumber, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
 
-        int bt2 = brLabels.readInt();
-        int LabelsNumber = brLabels.readInt();
+
         byte[] pixels = new byte[RowsNumber * ColsNumber];
         for (int Counter = 0; Counter < ImagesNumber; Counter++) {
             List<Double> imageInput = new ArrayList<Double>();
@@ -48,35 +51,46 @@ public class Generator {
                 imageInput.add((double) (b / 255.0f)); //scale in 0 to 1 range
             }
             byte lbl = brLabels.readByte();
-            int pos=lbl;
-            exspectedOutput.set(pos,1d); //modify exspected output
+            int pos = lbl;
+            exspectedOutput.set(pos, 1d); //modify exspected output
 
             labels.add(exspectedOutput);
             images.add(imageInput);
 
-            for (int y = 0; y < RowsNumber; y++)
-            {
-                for (int x = 0; x < ColsNumber; x++)
-                {
-                    g2.setColor(new Color(255 - pixels[x * y], 255 - pixels[x * y], 255 - pixels[x * y]));
+            for (int y = 0; y < RowsNumber; y++) {
+                for (int x = 0; x < ColsNumber; x++) {
+                    int idx = KeepinRange(255 - pixels[x + y * ColsNumber]);
+                    g2.setColor(new Color(idx, idx, idx));
                     g2.fillRect(x, y, 1, 1);
 
                 }
             }
-            save(image,Counter);
-           image.flush();
+            save(image, Counter);
+            image.flush();
 
 
         }
         brImages.close();
         brLabels.close();
-        for (int i = 0; i < images.size(); i++)
-        {
+        for (int i = 0; i < images.size(); i++) {
             trainingSet.data.put(images.get(i), labels.get(i));
         }
         return trainingSet;
     }
-    public void save(BufferedImage img,int n) throws IOException {
-        ImageIO.write(img, "PNG", new File("D:/Studia/Rozpoznawanie Obrazu/Imagesimg"+n+".png"));
+
+    public void save(BufferedImage img, int n) throws IOException {
+        String dir = Generator.class.getResource("/").getFile();
+        ImageIO.write(img, "PNG", new File(dir + "/Images/img" + n + ".png"));
+    }
+
+    public int KeepinRange(int a) {
+        if (a > 255) {
+            a = 255;
+        }
+        if (a < 0) {
+            a = 0;
+        }
+
+        return a;
     }
 }
