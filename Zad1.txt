@@ -1,0 +1,7 @@
+1. Wczytywanie plików i generowanie bitmap
+1a.Ścienić i nadpisać istniejące bitmapy
+2.Ekstrakcja cech - ilość  pikseli,zakończenia linji(koniec i początek cyfry),pętle.
+3.Ekstraktor wydaje plik tesktowy - ilość tych punktów szczególnych.
+4.Cechy są zapisywane do listy. - Klasyfikator
+5.Obliczanie odległości między wektorami cech.
+6.Macierz pomyłek 0-9,0-9

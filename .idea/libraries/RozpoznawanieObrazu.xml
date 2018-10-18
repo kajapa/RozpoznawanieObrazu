@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="RozpoznawanieObrazu">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/digit-train-data.zip!/" />
+      <root url="jar://$PROJECT_DIR$/digit-train-labels.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
