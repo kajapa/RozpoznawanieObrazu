@@ -37,7 +37,7 @@ public class Generator {
         Graphics2D g2 = image.createGraphics();
 
 
-        byte[] pixels = new byte[RowsNumber * ColsNumber];
+        int[] pixels = new int[RowsNumber * ColsNumber];
         for (int Counter = 0; Counter < ImagesNumber; Counter++) {
             List<Double> imageInput = new ArrayList<Double>();
             List<Double> exspectedOutput = new ArrayList<Double>();
@@ -45,10 +45,12 @@ public class Generator {
                 exspectedOutput.add(0d);
 
             for (int p = 0; p < pixels.length; p++) {
-                byte b = brImages.readByte();
-                pixels[p] = b;
+                int bb = brImages.readUnsignedByte();
+               // byte b = (byte) bb;
+              //  System.out.println(bb + " - " + b);
+                pixels[p] = bb;
 
-                imageInput.add((double) (b / 255.0f)); //scale in 0 to 1 range
+                imageInput.add((double) (bb / 255.0f)); //scale in 0 to 1 range
             }
             byte lbl = brLabels.readByte();
             int pos = lbl;
