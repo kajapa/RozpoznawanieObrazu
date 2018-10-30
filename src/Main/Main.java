@@ -16,17 +16,17 @@ public class Main  {
         String images="train-images.idx3-ubyte";
         String labels ="train-labels.idx1-ubyte";
         String dir = Generator.class.getResource("/").getFile();
-       // Generator gen= new Generator();
-       //gen.CreateTrainingSet(images,labels);
+        Generator gen= new Generator();
+       gen.CreateTrainingSet(images,labels);
 
         //ImageThinning IT= new ImageThinning();
 
-        Color myWhite = new Color(255, 255, 255);
+        /*Color myWhite = new Color(255, 255, 255);
         System.out.println("black: "+Color.BLACK.getRGB());
       // thin.GetThinnedImage("D:/Studia/RozpoznawanieObrazu/out/production/RozpoznawanieObrazu/Images/img0.png");
         ImageThinning IT;
        // IT.DoThinning2("D:/Studia/RozpoznawanieObrazu/out/production/RozpoznawanieObrazu/Images/img"+2+".png",2,1);
-        /*for(int i=0;i<60000;i++){
+        for(int i=0;i<60000;i++){
             IT= new ImageThinning();
             IT.DoThinning2("D:/Studia/RozpoznawanieObrazu/out/production/RozpoznawanieObrazu/Images/img"+i+".png",i,3);
             System.out.println("image: "+i);
@@ -34,7 +34,7 @@ public class Main  {
         }*/
         System.out.println(dir);
         FeatureExtractor FE= new FeatureExtractor();
-        FE.Extract("D:/Studia/RozpoznawanieObrazu/out/production/RozpoznawanieObrazu/Thinned/imgt2.png","imgt2");
+        FE.Extract("D:/Studia/RozpoznawanieObrazu/out/production/RozpoznawanieObrazu/Thinned/imgt2.png","imgt0");
 
 
     }

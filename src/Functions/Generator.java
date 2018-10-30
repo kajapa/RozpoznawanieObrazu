@@ -16,8 +16,7 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 
 public class Generator {
-    public Generator(BufferedImage img) {
-    }
+
 
     public TrainingSet CreateTrainingSet(String imagefile, String labelsfile) throws IOException {
 
@@ -70,7 +69,7 @@ public class Generator {
 
                 }
             }
-            save(image, Counter);
+            save(image, Counter,lbl);
             image.flush();
 
 
@@ -83,9 +82,9 @@ public class Generator {
         return trainingSet;
     }
 
-    public void save(BufferedImage img, int n) throws IOException {
+    public void save(BufferedImage img, int n,int lb) throws IOException {
         String dir = Generator.class.getResource("/").getFile();
-        ImageIO.write(img, "PNG", new File(dir + "/Images/img" + n + ".png"));
+        ImageIO.write(img, "PNG", new File(dir + "/Images/"+lb+"_" + n + ".png"));
     }
 
     public int KeepinRange(int a) {
