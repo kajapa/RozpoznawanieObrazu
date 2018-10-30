@@ -16,6 +16,9 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 
 public class Generator {
+    public Generator(BufferedImage img) {
+    }
+
     public TrainingSet CreateTrainingSet(String imagefile, String labelsfile) throws IOException {
 
         TrainingSet trainingSet = new TrainingSet();
