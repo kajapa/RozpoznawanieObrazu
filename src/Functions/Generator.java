@@ -16,7 +16,8 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 
 public class Generator {
-
+    String dir = Generator.class.getResource("/").getFile();
+    int a,b,c,d,e,f,g,h,i,j=0;
 
     public TrainingSet CreateTrainingSet(String imagefile, String labelsfile) throws IOException {
 
@@ -24,6 +25,7 @@ public class Generator {
         List<double[]> samples = new ArrayList<double[]>();
         List<List<Double>> labels = new ArrayList<List<Double>>();
         List<List<Double>> images = new ArrayList<List<Double>>();
+
 
 
         DataInputStream brLabels = new DataInputStream(new FileInputStream(labelsfile));
@@ -69,7 +71,7 @@ public class Generator {
 
                 }
             }
-            save(image, Counter,lbl);
+            save(image,lbl);
             image.flush();
 
 
@@ -82,9 +84,54 @@ public class Generator {
         return trainingSet;
     }
 
-    public void save(BufferedImage img, int n,int lb) throws IOException {
-        String dir = Generator.class.getResource("/").getFile();
-        ImageIO.write(img, "PNG", new File(dir + "/Images/"+lb+"_" + n + ".png"));
+    public void save(BufferedImage img,int lb) throws IOException {
+
+        switch (lb) {
+            case 0:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/0/"+lb+a+".png"));
+                a++;
+                break;
+            case 1:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/1/"+lb+b+".png"));
+                b++;
+                break;
+            case 2:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/2/"+lb+c+".png"));
+                c++;
+                break;
+            case 3:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/3/"+lb+d+".png"));
+                d++;
+                break;
+            case 4:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/4/"+lb+e+".png"));
+                e++;
+                break;
+            case 5:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/5/"+lb+f+".png"));
+                f++;
+                break;
+            case 6:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/6/"+lb+g+".png"));
+                g++;
+                break;
+            case 7:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/7/"+lb+h+".png"));
+                h++;
+                break;
+            case 8:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/8/"+lb+i+".png"));
+                i++;
+                break;
+            case 9:
+                ImageIO.write(img, "PNG", new File(dir + "/Images/9/"+lb+j+".png"));
+                j++;
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     public int KeepinRange(int a) {

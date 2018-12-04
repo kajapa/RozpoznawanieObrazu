@@ -80,7 +80,7 @@ public class ImageThinning {
 
     }
 
-    public void DoThinning2(String file,int n,int loops) throws IOException {
+    public void DoThinning2(String file,int n,int loops,int lb) throws IOException {
         nbrs.add(P2);
         nbrs.add(P3);
         nbrs.add(P4);
@@ -114,7 +114,7 @@ public class ImageThinning {
         toWhite.clear();
 
         }
-        save(step1,n);
+        save(step1,n,lb);
 
     }
 
@@ -149,7 +149,7 @@ public class ImageThinning {
         return res;
     }
 
-    public void save(int[][] list, int n) throws IOException {
+    public void save(int[][] list, int n,int lb) throws IOException {
         BufferedImage image = new BufferedImage(list.length, list.length, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
 
@@ -167,7 +167,7 @@ public class ImageThinning {
 
 
         String dir = Generator.class.getResource("/").getFile();
-        ImageIO.write(image, "PNG", new File(dir + "/Thinned/imgt" + n + ".png"));
+        ImageIO.write(image, "PNG", new File(dir + "/Thinned/"+lb+"/"+lb + n + ".png"));
     }
     public boolean CheckWhitePixels(int x, int y, int[][] table,Position p1,Position p2,Position p3){
         if((table[x+p1.getX()][y+p1.getY()])==0||(table[x+p2.getX()][y+p2.getY()])==0||(table[x+p3.getX()][y+p3.getY()])==0)
